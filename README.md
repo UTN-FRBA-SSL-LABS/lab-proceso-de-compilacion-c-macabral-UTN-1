@@ -351,12 +351,12 @@ Todos son correctos. Lo importante no es el número exacto sino que sea **varios
 **P1.** Ejecutá `wc -l programa.i` y escribí el número de líneas que obtenés.
 
 <!-- Completá la línea siguiente con el número exacto (solo dígitos, sin espacios): -->
-LINEAS_I=
+LINEAS_I=1900
 
 ¿Por qué ese número es tan mayor que las 94 líneas de `programa.c`?
 
 > **R:**
-
+Porque incluye el codgio de las librerias incluidas
 ---
 
 #### Herramienta: `grep`
@@ -394,12 +394,12 @@ grep "Archivo fuente principal" programa.i   # no debe encontrar nada
 ¿El comando encuentra algo o no devuelve nada?
 
 <!-- Completá con SI (si encontró algo) o NO (si no encontró nada): -->
-COMENTARIOS_EN_I=
+COMENTARIOS_EN_I=NO
 
 ¿Por qué ocurre eso?
 
 > **R:**
-
+Porque no existe el texto en el documento
 ---
 
 #### Observación 2: Las macros se expanden
@@ -428,23 +428,27 @@ Nótese que `CUADRADO(5)` se expande a `((5) * (5))`, con los paréntesis extra 
 **P3.** Ejecutá `grep -n "CUADRADO" programa.i` y copiá la salida completa.
 
 > **R:**
-
+483:# 120 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 2 3 4
+951:# 130 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
+1167:# 180 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
+1860:    printf("=== Laboratorio de Compilacion en C (v%s) ===\n\n", "1.0");
+1869:    printf("CUADRADO(%d)      = %d\n", 5, ((5) * (5)));
 ¿El nombre `CUADRADO` aparece tal cual en `programa.i`, o fue reemplazado
 por otra cosa? Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-CUADRADO_EN_I=
+CUADRADO_EN_I=SI
 
 ---
 
 **P4.** Ejecutá `grep -n '"1\.0"' programa.i` y copiá la línea encontrada.
 
 > **R:**
-
+1860:    printf("=== Laboratorio de Compilacion en C (v%s) ===\n\n", "1.0");
 ¿Cuál era el nombre de la macro en `programa.c` que fue reemplazada por `"1.0"`?
 
 <!-- Completá con el nombre exacto de la macro (en mayúsculas, como está en el fuente): -->
-NOMBRE_MACRO_VERSION=
+NOMBRE_MACRO_VERSION=VERSION
 
 ---
 
@@ -481,12 +485,12 @@ gcc -E -DDEBUG programa.c | grep "Iniciando"
 ```
 
 > **R:**
-
+    printf("[DEBUG] %s\n", ("Iniciando main"));
 ¿Agregar `-DDEBUG` hace que aparezca código nuevo en el `.i` que antes no estaba?
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-DEBUG_ACTIVA_CODIGO=
+DEBUG_ACTIVA_CODIGO=SI
 
 ---
 
@@ -666,13 +670,14 @@ Aparecen como instrucciones de llamada (por ejemplo `bl _area_circulo`), pero **
 **P7.** Ejecutá `grep "area_circulo" programa.s` y copiá la salida.
 
 > **R:**
-
+        .string "area_circulo(%.1f) = %.4f\n"
+        call    area_circulo@PLT
 ¿`area_circulo` aparece como una función *definida* en `programa.s`
 (con su propio bloque de instrucciones) o solo como una *llamada* (instrucción sin cuerpo)?
 Respondé DEFINIDA o LLAMADA:
 
 <!-- Completá con DEFINIDA o LLAMADA: -->
-AREA_EN_S=
+AREA_EN_S=LLAMADA
 
 ---
 
@@ -703,7 +708,7 @@ grep "llamadas" programa.s
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-LLAMADAS_EN_S=
+LLAMADAS_EN_S=SI
 
 ---
 
@@ -813,7 +818,7 @@ Salida esperada (simplificada):
 Escribí solo la letra (una mayúscula):
 
 <!-- Completá con la letra exacta que muestra nm (U, T, D, etc.): -->
-TIPO_AREA_EN_O=
+TIPO_AREA_EN_O=U
 
 ---
 
@@ -839,7 +844,7 @@ pero tipo `T` en `matematica.o`?
 Respondé con una palabra: PREPROCESAMIENTO, COMPILACION, ENSAMBLADO o ENLAZADO:
 
 <!-- Completá con una de las cuatro opciones: -->
-ETAPA_QUE_RESUELVE=
+ETAPA_QUE_RESUELVE=ENLAZADO
 
 ---
 
@@ -864,7 +869,7 @@ Un `.o` no es ejecutable por dos razones:
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-EJECUTABLE_O=
+EJECUTABLE_O=NO
 
 ---
 
@@ -959,7 +964,7 @@ Ejecutá `nm programa | grep "area_circulo"` y copiá la salida.
 Escribí solo la letra:
 
 <!-- Completá con la letra exacta que muestra nm: -->
-TIPO_AREA_ENLAZADO=
+TIPO_AREA_ENLAZADO=T
 
 ---
 
@@ -981,7 +986,7 @@ Quedan algunos `U` incluso en el ejecutable final. ¿Por qué? Son funciones de 
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-SIMBOLOS_U_FINAL=
+SIMBOLOS_U_FINAL=SI
 
 ¿Por qué quedan? ¿Quién los resuelve y cuándo?
 
@@ -1004,7 +1009,7 @@ SIMBOLOS_U_FINAL=
 ¿Qué valor da `factorial(5)`? Escribí solo el número:
 
 <!-- Completá con el número exacto: -->
-FACTORIAL_5=
+FACTORIAL_5=120
 
 ---
 
